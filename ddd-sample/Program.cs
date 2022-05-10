@@ -12,6 +12,7 @@ namespace ddd_sample
             cart.add(applePencil, 2);
             var sonyWirelessHeadPhone = new Product("Sony Wireless headphone");
             cart.add(sonyWirelessHeadPhone);
+            cart.remove(applePencil);
 
             Console.WriteLine("Cart = " + cart);
             var products = cart.Products;

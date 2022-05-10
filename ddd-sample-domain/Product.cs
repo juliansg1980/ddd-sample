@@ -17,5 +17,10 @@ namespace ddd_sample_domain
                     "name='" + Name + '\'' +
                     '}';
         }
+
+        public Boolean HasSameName(Product toCompare)
+        {
+            return Name.Equals(toCompare.Name);
+        }
     }
 }

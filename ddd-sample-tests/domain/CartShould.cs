@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Linq;
 using NSubstitute;
 using System;
+using System.Collections.Generic;
 
 namespace ddd_sample_tests.domain
 {
@@ -53,8 +54,26 @@ namespace ddd_sample_tests.domain
 
             cart.Products.Should().HaveCount(1);
             cart.Products.First().Should().Be(givenAProduct);
-            cart.ProductsWithQuantities.Should().HaveCount(1);
-            cart.ProductsWithQuantities.First().Should().BeEquivalentTo(Tuple.Create(givenAProduct, givenAnyQuantity));
+            cart.Items.Should().HaveCount(1);
+            cart.Items.First().Should().BeEquivalentTo(new Item(givenAProduct, givenAnyQuantity));
+        }
+
+        [Test]
+        public void remove_a_product()
+        {
+            var givenAProductToRemove = new Product("productToRemove");
+            var givenAnotherProduct = new Product("anotherProduct");
+            var cart = new Cart();
+            cart.add(givenAProductToRemove, 2);
+            cart.add(givenAnotherProduct, 2);
+            cart.add(givenAProductToRemove, 5);
+
+            cart.remove(givenAProductToRemove);
+
+            var expectedItems = new List<Item>() { new Item(givenAnotherProduct, 2)};
+            cart.Items.Should().BeEquivalentTo(expectedItems);
+            var expectedProducts = new List<Product>() { givenAnotherProduct };
+            cart.Products.Should().BeEquivalentTo(expectedProducts);
         }
     }
 }
