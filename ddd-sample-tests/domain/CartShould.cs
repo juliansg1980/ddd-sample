@@ -1,6 +1,7 @@
 ﻿using ddd_sample_domain;
 using FluentAssertions;
 using NUnit.Framework;
+using System.Linq;
 
 namespace ddd_sample_tests.domain
 {
@@ -13,6 +14,18 @@ namespace ddd_sample_tests.domain
             var cart = new Cart();
 
             cart.Products.Should().BeEmpty();
+        }
+
+        [Test]
+        public void add_a_product()
+        {
+            var givenAProduct = new Product("anyName");
+            var cart = new Cart();
+
+            cart.add(givenAProduct);
+
+            cart.Products.Should().HaveCount(1);
+            cart.Products.First().Should().Be(givenAProduct);
         }
     }
 }
