@@ -3,6 +3,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using System.Linq;
 using NSubstitute;
+using System;
 
 namespace ddd_sample_tests.domain
 {
@@ -38,7 +39,22 @@ namespace ddd_sample_tests.domain
             var cart = new Cart();
             cart.add(givenAProduct);
 
-            cart.ToString().Should().Be("Cart{products=[{anyProductInText}]}");
+            cart.ToString().Should().Be("Cart{products=[anyProductInText]}");
+        }
+
+        [Test]
+        public void add_a_product_with_quantity()
+        {
+            var givenAProduct = new Product("anyName");
+            var cart = new Cart();
+            var givenAnyQuantity = 2;
+
+            cart.add(givenAProduct, givenAnyQuantity);
+
+            cart.Products.Should().HaveCount(1);
+            cart.Products.First().Should().Be(givenAProduct);
+            cart.ProductsWithQuantities.Should().HaveCount(1);
+            cart.ProductsWithQuantities.First().Should().BeEquivalentTo(Tuple.Create(givenAProduct, givenAnyQuantity));
         }
     }
 }
