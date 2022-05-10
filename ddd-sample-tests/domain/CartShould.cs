@@ -115,9 +115,9 @@ namespace ddd_sample_tests.domain
         }
 
         [Test]
-        public void get_equals_when_cart_has_two_different_items()
+        public void not_get_equals_when_cart_has_two_different_items()
         {
-            /*var cart1 = new Cart();
+            var cart1 = new Cart();
             var item1 = new Item(new Product("Sony Wireless headphone"), 1);
             cart1.add(item1);
             var cart2 = new Cart();
@@ -126,7 +126,7 @@ namespace ddd_sample_tests.domain
 
             var isEqual = cart1.Equals(cart2);
 
-            isEqual.Should().BeFalse();*/
+            isEqual.Should().BeFalse();
         }
     }
 }
