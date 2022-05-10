@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ddd_sample_domain
@@ -8,16 +9,19 @@ namespace ddd_sample_domain
     {
         public List<Product> Products { get; private set; }
         public List<Item> Items { get; private set; }
+        public List<string> RemovalHistory { get; private set; }
 
         public Cart()
         {
             Products = new List<Product>();
             Items = new List<Item>();
+            RemovalHistory = new List<string>();
         }
 
         public void add(Product product)
         {
-            Products.Add(product);
+            if (!Products.Any(p => p.HasSameName(product)))
+                Products.Add(product);
         }
 
         public override String ToString()
@@ -39,6 +43,7 @@ namespace ddd_sample_domain
 
         public void remove(Product givenAProductToRemove)
         {
+            Products.Where(p => p.HasSameName(givenAProductToRemove)).ToList().ForEach(p => RemovalHistory.Add(p.Name));
             Items.RemoveAll(i => i.IsSameProduct(givenAProductToRemove));
             Products.RemoveAll(p => p.HasSameName(givenAProductToRemove));
         }
