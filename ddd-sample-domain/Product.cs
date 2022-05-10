@@ -11,7 +11,7 @@ namespace ddd_sample_domain
             this.Name = name;
         }
 
-        public override String ToString()
+        public virtual new String ToString()
         {
             return "Product{" +
                     "name='" + Name + '\'' +

@@ -10,6 +10,8 @@ namespace ddd_sample
             var cart = new Cart();
             var applePencil = new Product("Apple Pencil");
             cart.add(applePencil);
+            var sonyWirelessHeadPhone = new Product("Sony Wireless headphone");
+            cart.add(sonyWirelessHeadPhone);
 
             Console.WriteLine("Cart = " + cart);
             var products = cart.Products;

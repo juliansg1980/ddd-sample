@@ -20,9 +20,13 @@ namespace ddd_sample_domain
 
         public override String ToString()
         {
-            return "Cart{" +
-                    "products=" + Products +
-                    '}';
+            var cartInString = "Cart{products=[";
+            foreach (var product in Products)
+            {
+                cartInString += "{" + product.ToString() + "}";
+            }
+            cartInString += "]}";
+            return cartInString;
         }
     }
 }
