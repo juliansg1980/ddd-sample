@@ -37,8 +37,7 @@ namespace ddd_sample_domain
 
         public void add(Product product, int quantity)
         {
-            add(product);
-            Items.Add(new Item(product, quantity));
+            add(new Item(product, quantity));
         }
 
         public void remove(Product givenAProductToRemove)
@@ -46,6 +45,12 @@ namespace ddd_sample_domain
             Products.Where(p => p.HasSameName(givenAProductToRemove)).ToList().ForEach(p => RemovalHistory.Add(p.Name));
             Items.RemoveAll(i => i.IsSameProduct(givenAProductToRemove));
             Products.RemoveAll(p => p.HasSameName(givenAProductToRemove));
+        }
+
+        public void add(Item cartItem)
+        {
+            add(cartItem.Product);
+            Items.Add(cartItem);
         }
     }
     public class Item

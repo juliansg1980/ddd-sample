@@ -62,6 +62,25 @@ namespace ddd_sample_tests.domain
         }
 
         [Test]
+        public void add_a_cart_item()
+        {
+            var givenAProduct = new Product("anyName");
+            var givenAnotherProductWithSameName = new Product("anyName");
+            var cart = new Cart();
+            var givenAnyQuantity = 2;
+            var cartItem = new Item(givenAProduct, givenAnyQuantity);
+
+            cart.add(cartItem);
+            cart.add(cartItem);
+
+            cart.Products.Should().HaveCount(1);
+            cart.Products.First().Should().Be(givenAProduct);
+            cart.Items.Should().HaveCount(2);
+            cart.Items.First().Should().BeEquivalentTo(cartItem);
+            cart.Items.Last().Should().BeEquivalentTo(cartItem);
+        }
+
+        [Test]
         public void remove_a_product()
         {
             var givenAProductToRemove = new Product("productToRemove");
@@ -94,6 +113,21 @@ namespace ddd_sample_tests.domain
 
             var expectedRemovalHistory = new List<string> { "productToRemove", "anotherProduct" };
             cart.RemovalHistory.Should().BeEquivalentTo(expectedRemovalHistory);
+        }
+
+        [Test]
+        public void get_equals_when_cart_has_two_different_items()
+        {
+            /*var cart1 = new Cart();
+            var item1 = new Item(new Product("Sony Wireless headphone"), 1);
+            cart1.add(item1);
+            var cart2 = new Cart();
+            var item2 = new Item(new Product("Sony Wireless headphone"), 1);
+            cart2.add(item2);
+
+            var isEqual = cart1.Equals(cart2);
+
+            isEqual.Should().BeFalse();*/
         }
     }
 }
