@@ -142,5 +142,18 @@ namespace ddd_sample_tests.domain
 
             isEqual.Should().BeFalse();
         }
+
+        [Test]
+        public void get_equals_when_carts_has_same_item()
+        {
+            var cart1 = new Cart();
+            var item1 = new Item(new Product("Sony Wireless headphone"), 1);
+            cart1.add(item1);
+            var cart2 = cart1;
+
+            var isEqual = cart1.Equals(cart2);
+
+            isEqual.Should().BeTrue();
+        }
     }
 }
