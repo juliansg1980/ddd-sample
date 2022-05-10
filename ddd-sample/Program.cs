@@ -9,7 +9,7 @@ namespace ddd_sample
         {
             var cart = new Cart();
             var applePencil = new Product("Apple Pencil");
-            cart.add(applePencil);
+            cart.add(applePencil, 2);
             var sonyWirelessHeadPhone = new Product("Sony Wireless headphone");
             cart.add(sonyWirelessHeadPhone);
 
@@ -17,11 +17,7 @@ namespace ddd_sample
             var products = cart.Products;
 
             Console.WriteLine("----------------------------------------");
-            Console.WriteLine("products = ");
-            foreach (var product in products)
-            {
-                Console.WriteLine(product);
-            }
+            Console.WriteLine("products = " + cart.ToString());
             Console.WriteLine("----------------------------------------");
         }
     }
