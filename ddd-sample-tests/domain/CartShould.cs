@@ -64,9 +64,8 @@ namespace ddd_sample_tests.domain
         [Test]
         public void add_a_cart_item()
         {
-            var givenAProduct = new Product("anyName");
-            var givenAnotherProductWithSameName = new Product("anyName");
             var cart = new Cart();
+            var givenAProduct = new Product("anyName");
             var givenAnyQuantity = 2;
             var cartItem = new Item(givenAProduct, givenAnyQuantity);
 
