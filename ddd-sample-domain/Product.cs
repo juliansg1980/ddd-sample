@@ -11,6 +11,14 @@ namespace ddd_sample_domain
             this.Name = name;
         }
 
+        public Product(String name, Price price)
+        {
+            this.Name = name;
+            this.Price = price;
+        }
+
+        public Price Price { get; set; }
+
         public virtual new String ToString()
         {
             return "Product{" +

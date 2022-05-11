@@ -12,7 +12,7 @@ namespace ddd_sample
             cart.add(applePencil, 2);
             var sonyWirelessHeadPhone = new Product("Sony Wireless headphone");
             cart.add(sonyWirelessHeadPhone);
-            cart.remove(applePencil);
+            //cart.remove(applePencil);
 
             Console.WriteLine("Cart = " + cart);
             var products = cart.Products;
@@ -20,6 +20,8 @@ namespace ddd_sample
             Console.WriteLine("----------------------------------------");
             Console.WriteLine("products = " + cart.ToString());
             Console.WriteLine("----------------------------------------");
+
+            cart.checkOut();
         }
     }
 }

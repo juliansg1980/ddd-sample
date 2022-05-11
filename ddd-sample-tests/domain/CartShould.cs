@@ -155,5 +155,13 @@ namespace ddd_sample_tests.domain
 
             isEqual.Should().BeTrue();
         }
+
+        private class CartForTest : Cart
+        {
+            public CartForTest(List<Item> items)
+            {
+                base.Items = items;
+            }
+        }
     }
 }

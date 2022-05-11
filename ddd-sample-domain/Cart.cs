@@ -8,8 +8,10 @@ namespace ddd_sample_domain
     public class Cart
     {
         public List<Product> Products { get; private set; }
-        public List<Item> Items { get; private set; }
+        public List<Item> Items { get; protected set; }
         public List<string> RemovalHistory { get; private set; }
+        public Order Order { get; private set; }
+        public bool IsCheckOut { get; private set; }
 
         public Cart()
         {
@@ -52,22 +54,16 @@ namespace ddd_sample_domain
             add(cartItem.Product);
             Items.Add(cartItem);
         }
-    }
-    public class Item
-    {
-        public Product Product { get; private set; }
 
-        public int Quantity { get; private set; }
-
-        public Item(Product product, int quantity)
+        public void checkOut()
         {
-            Product = product;
-            Quantity = quantity;
-        }
-
-        public Boolean IsSameProduct(Product toCompare)
-        {
-            return Product.HasSameName(toCompare);
+            var productsToOrder = new List<Product>();
+            foreach (var item in Items)
+            {
+                productsToOrder.AddRange(item.GetProductsToOrder());
+            }
+            Order = new Order(productsToOrder);
+            IsCheckOut = true;
         }
     }
 }
